@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Infrastructure.Contracts;
 using Infrastructure.Data;
+using Infrastructure.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -29,7 +31,14 @@ namespace API
         {
 
             services.AddControllers();
+
+            // Database Context Services
             services.AddDbContext<StoreContext>();
+
+            // Repositories Services
+            services.AddScoped<IProductRepository, ProductRepository>();
+
+            // Swagger Service
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPIv5", Version = "v1" });
