@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Core.Contracts;
 using Core.Entities;
+using Core.Specifications;
 using Infrastructure.Contracts;
 
 namespace Infrastructure.Services
@@ -17,34 +18,34 @@ namespace Infrastructure.Services
             _repo = repository;    
         }
 
-        public async Task<IReadOnlyList<Product>> GetProductsAsync()
+        public async Task<IReadOnlyList<Product>> GetProducts()
         {
-            return await _repo.FindAll();
+            return await _repo.FindAllAsync();
         }
 
-        public async Task<IReadOnlyList<Product>> GetProductsAsync(ISpecification<Product> criteria)
+        public async Task<IReadOnlyList<Product>> GetProducts(Specification<Product> criteria)
         {
-            return await _repo.FindAll(criteria);
+            return await _repo.FindAllAsync(criteria);
         }
 
-        public async Task<IReadOnlyList<ProductBrand>> GetProductBrandsAsync()
+        public async Task<IReadOnlyList<ProductBrand>> GetProductBrands()
         {
             return await _repo.GetProductBrandsAsync();
         }
 
-        public async Task<Product> GetProductByIdAsync(int id)
+        public async Task<Product> GetProductById(int id)
         {
-            return await _repo.FindById(id);
+            return await _repo.FindByIdAsync(id);
         }
 
-        public async Task<Product> GetProductAsync(ISpecification<Product> criteria)
+        public async Task<Product> GetProduct(Specification<Product> criteria)
         {
-            return await _repo.FindOne(criteria);
+            return await _repo.FindOneAsync(criteria);
         }
 
-        public async Task<IReadOnlyList<ProductType>> GetProductTypesAsync()
+        public async Task<IReadOnlyList<ProductType>> GetProductTypes()
         {
-            return await _repo.GetProductTypes();
+            return await _repo.GetProductTypesAsync();
         }
     }
 }

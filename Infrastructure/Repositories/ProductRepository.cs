@@ -16,7 +16,7 @@ namespace Infrastructure.Repositories
             return await store.Brands.ToListAsync();
         }
 
-        public async Task<IReadOnlyList<ProductType>> GetProductTypes()
+        public async Task<IReadOnlyList<ProductType>> GetProductTypesAsync()
         {
             return await store.ProductTypes.ToListAsync();
         }

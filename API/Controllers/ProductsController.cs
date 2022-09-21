@@ -1,3 +1,5 @@
+using API.Dtos;
+using AutoMapper;
 using Core.Entities;
 using Infrastructure.Data;
 using Infrastructure.Services;
@@ -12,36 +14,38 @@ namespace API.Controllers
     public class ProductsController : ControllerBase
     {
         private ProductService _service;
-        public ProductsController(ProductService service)
+        private IMapper _mapper;
+        public ProductsController(ProductService service, IMapper mapper)
         {
             _service = service;
+            _mapper = mapper;
         }
         
         [HttpGet]
-        public async Task<ActionResult<IReadOnlyList<Product>>> GetProducts()
+        public async Task<ActionResult<IReadOnlyList<ProductDto>>> GetProducts()
         {
-            var products  = await _service.GetProductsAsync();
-            return Ok(products);
+            var products  = await _service.GetProducts();
+            return Ok(_mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductDto>>(products));
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Product>> GetProduct(int id)
+        public async Task<ActionResult<ProductDto>> GetProduct(int id)
         {
-            var product = await _service.GetProductByIdAsync(id);
-            return Ok(product);
+            var product = await _service.GetProductById(id);
+            return Ok(_mapper.Map<Product, ProductDto>(product));
         }
 
         [HttpGet("brands")]
         public async Task<ActionResult<IReadOnlyList<ProductBrand>>> GetProductBrands()
         {
-            var brands = await _service.GetProductBrandsAsync();
+            var brands = await _service.GetProductBrands();
             return Ok(brands);
         }
 
         [HttpGet("types")]
         public async Task<ActionResult<IReadOnlyList<ProductType>>> GetProductTypes()
         {
-            var types = await _service.GetProductTypesAsync();
+            var types = await _service.GetProductTypes();
             return Ok(types);
         }
     }

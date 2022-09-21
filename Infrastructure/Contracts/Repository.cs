@@ -1,9 +1,13 @@
 using Core.Contracts;
+using Core.Entities;
+using Core.Specifications;
 using Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Contracts
 {
-    public abstract class Repository<T> : IRepository<T>    
+    public class Repository<T> : IRepository<T>
+    where T : Entity
     {        
         protected StoreContext store;
 
@@ -12,34 +16,34 @@ namespace Infrastructure.Contracts
             store = context;
         }
 
-        public Task<int> Count()
+        public async Task<int> CountAsync()
         {
-            throw new NotImplementedException();
+            return await store.Set<T>().CountAsync();
         }
 
-        public Task<int> Count(ISpecification<T> criteria)
+        public async Task<int> CountAsync(Specification<T> criteria)
         {
-            throw new NotImplementedException();
+            return await store.Set<T>().CountAsync(entity => criteria.isSatisfiedBy(entity));
         }
 
-        public Task<IReadOnlyList<T>> FindAll()
+        public async Task<IReadOnlyList<T>> FindAllAsync()
         {
-            throw new NotImplementedException();
+            return await store.Set<T>().ToListAsync();
         }
 
-        public Task<IReadOnlyList<T>> FindAll(ISpecification<T> criteria)
+        public async Task<IReadOnlyList<T>> FindAllAsync(Specification<T> criteria)
         {
-            throw new NotImplementedException();
+            return await criteria.AsQueryable(store.Set<T>().AsQueryable()).ToListAsync();
         }
 
-        public Task<T> FindById(int id)
+        public async Task<T> FindByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await store.Set<T>().FindAsync(id);
         }
 
-        public Task<T> FindOne(ISpecification<T> criteria)
+        public async Task<T> FindOneAsync(Specification<T> criteria)
         {
-            throw new NotImplementedException();
+            return await store.Set<T>().FirstOrDefaultAsync(entity => criteria.isSatisfiedBy(entity));
         }
     }
 }

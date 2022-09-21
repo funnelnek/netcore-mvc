@@ -10,6 +10,6 @@ namespace Infrastructure.Contracts
     public interface IProductRepository : IRepository<Product>
     {
         Task<IReadOnlyList<ProductBrand>> GetProductBrandsAsync();
-        Task<IReadOnlyList<ProductType>> GetProductTypes();
+        Task<IReadOnlyList<ProductType>> GetProductTypesAsync();
     }
 }

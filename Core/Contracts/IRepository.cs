@@ -2,16 +2,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Core.Entities;
+using Core.Specifications;
 
 namespace Core.Contracts
 {
-    public interface IRepository<T>
+    public interface IRepository<T> where T : Entity
     {
-        Task<IReadOnlyList<T>> FindAll();
-        Task<IReadOnlyList<T>> FindAll(ISpecification<T> criteria);
-        Task<T> FindOne(ISpecification<T> criteria);
-        Task<T> FindById(int id);
-        Task<int> Count();
-        Task<int> Count(ISpecification<T> criteria);
+        Task<IReadOnlyList<T>> FindAllAsync();
+        Task<IReadOnlyList<T>> FindAllAsync(Specification<T> criteria);
+        Task<T> FindOneAsync(Specification<T> criteria);
+        Task<T> FindByIdAsync(int id);
+        Task<int> CountAsync();
+        Task<int> CountAsync(Specification<T> criteria);
     }
 }
