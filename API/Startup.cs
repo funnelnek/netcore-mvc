@@ -4,6 +4,8 @@ using Infrastructure.Contracts;
 using Infrastructure.Data;
 using Microsoft.OpenApi.Models;
 using Infrastructure.Repositories;
+using API.Binders;
+using Infrastructure.Services;
 
 namespace API
 {
@@ -20,7 +22,9 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers();
+            services.AddControllers(option => {
+                option.ModelBinderProviders.Insert(0, new QueryFilterBinderProvider());
+            });
 
             // Database Context Services
             services.AddDbContext<StoreContext>();
@@ -29,6 +33,9 @@ namespace API
             services.AddAutoMapper(typeof(MappingProfiles));
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<IProductRepository, ProductRepository>();
+
+            
+            services.AddScoped<ProductService>();
 
             // Swagger Service
             services.AddSwaggerGen(c =>

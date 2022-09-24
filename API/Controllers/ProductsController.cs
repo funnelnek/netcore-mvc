@@ -1,10 +1,9 @@
 using API.Dtos;
 using AutoMapper;
 using Core.Entities;
-using Infrastructure.Data;
 using Infrastructure.Services;
+using Infrastructure.Utility;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
@@ -22,9 +21,17 @@ namespace API.Controllers
         }
         
         [HttpGet]
-        public async Task<ActionResult<IReadOnlyList<ProductDto>>> GetProducts()
+        public async Task<ActionResult<IReadOnlyList<ProductDto>>> GetProducts([FromQuery] QueryCriteria<Product> criteria)
         {
-            var products  = await _service.GetProducts();
+            IReadOnlyList<Product> products = null;
+
+            if (criteria != null)
+            {
+                products  = await _service.GetProducts(criteria);
+                return Ok(_mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductDto>>(products));
+            }
+            
+            products  = await _service.GetProducts();
             return Ok(_mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductDto>>(products));
         }
 
@@ -32,6 +39,7 @@ namespace API.Controllers
         public async Task<ActionResult<ProductDto>> GetProduct(int id)
         {
             var product = await _service.GetProductById(id);
+            var name = product["Name"];
             return Ok(_mapper.Map<Product, ProductDto>(product));
         }
 
