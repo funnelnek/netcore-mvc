@@ -8,13 +8,23 @@ using Core.Entities;
 
 namespace Core.Specifications
 {
-    public abstract class Specification<T> : ISpecification<T>
+    public class Specification<T> : ISpecification<T>
     {
-        public Specification()
+        protected Func<T, bool> _filter;
+        public Specification(IFilter<T> filter)
         {            
+            _filter = filter.ToPredicate();
         }
 
-        public abstract bool isSatisfiedBy(T entity);
+        public Specification(Func<T, bool> predicate)
+        {
+            _filter = predicate;
+        }
+
+        public bool isSatisfiedBy(T entity)
+        {
+            return _filter(entity);
+        }
 
         public ISpecification<T> And(ISpecification<T> criteria) 
         {

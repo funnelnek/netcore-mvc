@@ -1,10 +1,11 @@
-using Core.Contracts;
 using Core.Entities;
 using Core.Specifications;
+using Infrastructure.Contracts;
 using Infrastructure.Data;
+using Infrastructure.Utility;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure.Contracts
+namespace Infrastructure.Repositories
 {
     public class Repository<T> : IRepository<T>
     where T : Entity
@@ -21,9 +22,9 @@ namespace Infrastructure.Contracts
             return await store.Set<T>().CountAsync();
         }
 
-        public async Task<int> CountAsync(Specification<T> criteria)
+        public async Task<int> CountAsync(QueryCriteria<T> criteria)
         {
-            return await store.Set<T>().CountAsync(entity => criteria.isSatisfiedBy(entity));
+            return await criteria.AsQueryable().CountAsync();
         }
 
         public async Task<IReadOnlyList<T>> FindAllAsync()
@@ -31,9 +32,9 @@ namespace Infrastructure.Contracts
             return await store.Set<T>().ToListAsync();
         }
 
-        public async Task<IReadOnlyList<T>> FindAllAsync(Specification<T> criteria)
+        public async Task<IReadOnlyList<T>> FindAllAsync(QueryCriteria<T> criteria)
         {
-            return await criteria.AsQueryable(store.Set<T>().AsQueryable()).ToListAsync();
+            return await criteria.AsQueryable().ToListAsync();
         }
 
         public async Task<T> FindByIdAsync(int id)
@@ -41,9 +42,9 @@ namespace Infrastructure.Contracts
             return await store.Set<T>().FindAsync(id);
         }
 
-        public async Task<T> FindOneAsync(Specification<T> criteria)
+        public async Task<T> FindOneAsync(QueryCriteria<T> criteria)
         {
-            return await store.Set<T>().FirstOrDefaultAsync(entity => criteria.isSatisfiedBy(entity));
+            return await criteria.AsQueryable().FirstOrDefaultAsync();
         }
     }
 }

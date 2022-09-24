@@ -6,6 +6,7 @@ using Core.Contracts;
 using Core.Entities;
 using Core.Specifications;
 using Infrastructure.Contracts;
+using Infrastructure.Utility;
 
 namespace Infrastructure.Services
 {
@@ -23,8 +24,8 @@ namespace Infrastructure.Services
             return await _repo.FindAllAsync();
         }
 
-        public async Task<IReadOnlyList<Product>> GetProducts(Specification<Product> criteria)
-        {
+        public async Task<IReadOnlyList<Product>> GetProducts(QueryCriteria<Product> criteria)
+        {            
             return await _repo.FindAllAsync(criteria);
         }
 
@@ -38,7 +39,7 @@ namespace Infrastructure.Services
             return await _repo.FindByIdAsync(id);
         }
 
-        public async Task<Product> GetProduct(Specification<Product> criteria)
+        public async Task<Product> GetProduct(QueryCriteria<Product> criteria)
         {
             return await _repo.FindOneAsync(criteria);
         }

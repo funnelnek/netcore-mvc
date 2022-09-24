@@ -120,12 +120,12 @@ namespace API.Binders
 
                 if (predicate == CriteriaOperator.EQUAL)
                 {
-                    specifications.Add(x => (string) x[property] == value[0]);
+                    specifications.Add(x => x[property] == Convert.ChangeType(value[0], type.GetProperty(property).PropertyType));
                 }
 
                 if (predicate == CriteriaOperator.NOT_EQUAL)
                 {
-                    specifications.Add(x => (string) x[property] != value[0]);
+                    specifications.Add(x => x[property] != Convert.ChangeType(value[0], type.GetProperty(property).PropertyType));
                 }
 
                 if (predicate == CriteriaOperator.GREATER_THAN)
@@ -156,6 +156,10 @@ namespace API.Binders
                 if (predicate == CriteriaOperator.IN)
                 {
                     specifications.Add(x => !value.Contains(x[property]));
+                }
+
+                if (predicate == CriteriaOperator.LIKE) {
+                    specifications.Add(x => ((string) x[property]).Contains(value[0]));
                 }
             }
 

@@ -10,5 +10,11 @@ namespace Core.Entities
     public class Entity
     {
         public int Id { get; set; }
+
+        public object this[string key]
+        {
+            get => this.GetType().GetProperty(key).GetValue(this);
+            set => this.GetType().GetProperty(key).SetValue(this, value);
+        }
     }
 }
