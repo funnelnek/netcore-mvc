@@ -1,4 +1,5 @@
 using System.Dynamic;
+using System.Linq;
 using System.Linq.Expressions;
 using Core.Constants;
 using Core.Entities;
@@ -150,12 +151,28 @@ namespace API.Binders
 
                 if (predicate == CriteriaOperator.NOT_IN)
                 {
-                    specifications.Add(x => value.Contains(x[property]));
+                    List<object> values = value.Count() == 1 ? value[0].Split(',').Aggregate(new List<object>(), (current, val) => {
+                        current.Add(Convert.ChangeType(val, type.GetProperty(property).PropertyType));
+                        return current;
+                    }) : value.Aggregate(new List<object>(), (current, val) => {
+                        current.Add(Convert.ChangeType(val, type.GetProperty(property).PropertyType));
+                        return current;
+                    });
+                    
+                    specifications.Add(x => !values.Contains(x[property]));
                 }
 
                 if (predicate == CriteriaOperator.IN)
                 {
-                    specifications.Add(x => !value.Contains(x[property]));
+                    List<object> values = value.Count() == 1 ? value[0].Split(',').Aggregate(new List<object>(), (current, val) => {
+                        current.Add(Convert.ChangeType(val, type.GetProperty(property).PropertyType));
+                        return current;
+                    }) : value.Aggregate(new List<object>(), (current, val) => {
+                        current.Add(Convert.ChangeType(val, type.GetProperty(property).PropertyType));
+                        return current;
+                    });
+
+                    specifications.Add(x => values.Contains(x[property]));
                 }
 
                 if (predicate == CriteriaOperator.LIKE) {
