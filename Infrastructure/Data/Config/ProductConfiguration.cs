@@ -12,6 +12,7 @@ namespace Infrastructure.Data.Config
     {
         public void Configure(EntityTypeBuilder<Product> table)
         {
+            table.HasKey(e => e.Id);
             table.Property(p => p.Id)
             .IsRequired();
             
@@ -42,6 +43,9 @@ namespace Infrastructure.Data.Config
             table
             .HasIndex(e => e.Name)
             .IsUnique();
+
+            table.Navigation(e => e.Brand).AutoInclude();
+            table.Navigation(e => e.Type).AutoInclude();
         }
     }
 }

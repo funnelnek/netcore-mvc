@@ -1,6 +1,6 @@
 using System.Dynamic;
-using System.Linq;
 using System.Linq.Expressions;
+using Core.Attributes;
 using Core.Constants;
 using Core.Entities;
 using Infrastructure.Data;
@@ -24,64 +24,82 @@ namespace API.Binders
             var query = context.HttpContext.Request.Query;
             var type = this.GetType().GetGenericArguments()[0];            
             List<Expression<Func<T, bool>>> specifications = new List<Expression<Func<T, bool>>>();
+            int take = 0;
+            string orderBy = null;
             
             if (query.Count() == 0) 
             {
-                context.Result = ModelBindingResult.Success(null);
-                return Task.CompletedTask;
-            }
+                var attrs = type.GetCustomAttributes(true);
 
-            // OrderBy
-            if (query.TryGetValue("sort", out var sort)) 
-            {
-                Console.WriteLine(sort);
-
-                var sortables = sort[0].Split(",");
-
-                for (int i = 0; i < sortables.Count(); i++)
-                {       
-                    string sortBy = sortables[i];
-                    bool isDesc = sortBy.StartsWith('-');
-
-                    if (i == 0)
+                foreach (var attr in attrs)
+                {
+                    if (attr is LimitAttribute)
                     {
-                        switch(isDesc) 
-                        {
-                            case true:
-                                sortBy = char.ToUpper(sortBy.Substring(1)[0]) + sortBy.Substring(2);
-                                _query = _query.OrderByDescending(x => x.GetType().GetProperty(sortBy).GetValue(x));
-                                break;
-                            default:
-                                sortBy = char.ToUpper(sortBy[0]) + sortBy.Substring(1);
-                                _query = _query.OrderBy(x => x.GetType().GetProperty(sortBy).GetValue(x));
-                                break;
-                        }
+                        take = ((LimitAttribute) attr).Limit;
                     }
 
-                    switch(isDesc) 
+                    if (attr is OrderByAttribute)
                     {
-                        case true:
-                            sortBy = char.ToUpper(sortBy.Substring(1)[0]) + sortBy.Substring(2);
-                            _query = ((IOrderedQueryable<T>) _query).ThenByDescending(x => x.GetType().GetProperty(sortBy).GetValue(x));
-                            break;
-                        default:
-                            sortBy = char.ToUpper(sortBy[0]) + sortBy.Substring(1);
-                            _query = ((IOrderedQueryable<T>) _query).ThenBy(x => x.GetType().GetProperty(sortBy).GetValue(x));
-                            break;
+                        orderBy = ((OrderByAttribute) attr).OrderBy;                        
                     }
+                }
+
+                if (take == 0 && orderBy == null)
+                {
+                    context.Result = ModelBindingResult.Success(null);
+                    return Task.CompletedTask;
                 }
             }
 
+            // OrderBy
+            if (query.TryGetValue("sort", out var sort))
+            {
+                SetOrderBy(sort[0]);               
+            } 
+            else if (orderBy != null)
+            {
+                SetOrderBy(orderBy);
+            }
+
+            // Limit
             if (query.TryGetValue("limit", out var limit))
             {
                 _query = _query.Take(int.Parse(limit[0]));
-            }
+            } else if (take > 0) {
+                _query = _query.Take(take);                
+            }   
 
+            // Skip
             if (query.TryGetValue("skip", out var skip))
             {
                 _query = _query.Skip(int.Parse(skip[0]));
+            } else if (query.TryGetValue("page", out var page))
+            {
+                if (take <= 0)
+                {
+                    foreach (object attr in type.GetCustomAttributes(true))
+                    {
+                        if (attr is LimitAttribute)
+                        {
+                            take = ((LimitAttribute) attr).Limit;
+                        }
+                    }
+                }
+
+                take = take > 0 ? take : 30;
+
+                var pageNumber = int.Parse(page);
+                var pagesToSkip = --pageNumber * take;
+
+                if (pagesToSkip > 0) {
+                    _query = _query.Skip(pagesToSkip);
+                    _query = _query.Take(take);
+                } else {
+                    _query = _query.Take(take);
+                }
             }
 
+            // Projection
             if (query.TryGetValue("fields", out var fields))
             {
 
@@ -91,7 +109,7 @@ namespace API.Binders
 
                     foreach (var item in properties)
                     {
-                        var field = char.ToUpper(item[0]) + item.Substring(1);
+                        var field = CapitalizeProperty(item);
                         projection.Add(field, x.GetType().GetProperty(field).GetValue(x));
                     }
 
@@ -99,6 +117,7 @@ namespace API.Binders
                 })).AsQueryable();
             }
 
+            // Property Filters
             foreach (var parameter in query)
             {
                 var param = parameter.Key.Split(splitPattern, StringSplitOptions.RemoveEmptyEntries);
@@ -184,6 +203,47 @@ namespace API.Binders
 
             context.Result = ModelBindingResult.Success(criteria);
             return Task.CompletedTask;
+        }
+
+        private void SetOrderBy(string sort)
+        {
+            var sortables = sort.Split(",");
+
+            for (int i = 0; i < sortables.Count(); i++)
+            {       
+                bool isDesc = sortables[i].Trim().StartsWith('-');
+                string sortBy = isDesc ? CapitalizeProperty(sortables[i].Substring(1)) : CapitalizeProperty(sortables[i]);
+
+                if (i == 0)
+                {
+                    switch(isDesc) 
+                    {
+                        case true:                            
+                            _query = _query.OrderByDescending(x => x[sortBy]);
+                            break;
+                        default:                            
+                            _query = _query.OrderBy(x => x[sortBy]);
+                            break;
+                    }
+                    continue;
+                }
+
+                switch(isDesc) 
+                {
+                    case true:                        
+                        _query = ((IOrderedQueryable<T>) _query).ThenByDescending(x => x[sortBy]);
+                        break;
+                    default:                        
+                        _query = ((IOrderedQueryable<T>) _query).ThenBy(x => x[sortBy]);
+                        break;
+                }
+            }
+        }
+
+        private string CapitalizeProperty(string property)
+        {
+            property = property.Trim();
+            return char.ToUpper(property[0]) + property.Substring(1);
         }
     }
 }
