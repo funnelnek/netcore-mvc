@@ -1,0 +1,8 @@
+<div #background class="backdrop" *ngIf="backdrop">
+    <img [src]="backdrop.src" [alt]="backdrop.alt"/>
+    <div #overlay class="hero-overlay"></div>
+</div>
+
+<div #content class="content">
+    <ng-content></ng-content>
+</div>

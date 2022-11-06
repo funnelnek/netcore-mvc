@@ -1,0 +1,38 @@
+button {
+  position: relative;
+  display: flex;
+  padding: 8px 16px;  
+  background-color: #D5D5D5;  
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  overflow: hidden;
+  outline: none;
+
+  .label {    
+    font-family: var(--default-font-family);
+    font-size: var(--button-label-size);
+    font-weight: 400;
+    margin: 0 1rem;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+button[icon] {
+  width: var(--button-icon-size);
+  height: var(--button-icon-size);
+  padding: .8rem;
+}
+
+button[rounded] {
+  border-radius: .4rem;
+}
+
+button:disabled {
+  background-color: var(--button-disabled-background-color);
+  color: var(--button-disabled-foreground-color)
+}

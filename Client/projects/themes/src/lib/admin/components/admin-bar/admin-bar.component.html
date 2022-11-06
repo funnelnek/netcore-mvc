@@ -1,0 +1,8 @@
+<div pane [mode]="mode" [variant]="variant" [hideBackdrop]="hideBackdrop">
+    <admin-bar-header (onToggleMenu)="onToggleMenu()"></admin-bar-header>
+    <admin-user></admin-user>
+    <navigation></navigation>
+    <footer>
+        <span>version: {{ version | async }}</span>
+    </footer>
+</div>

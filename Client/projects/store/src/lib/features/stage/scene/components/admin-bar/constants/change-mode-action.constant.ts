@@ -1,0 +1,1 @@
+export const ADMIN_BAR_CHANGE_MODE = "[ADMIN BAR] CHANGE MODE";

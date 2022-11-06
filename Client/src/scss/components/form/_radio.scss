@@ -1,0 +1,18 @@
+input[type="radio"] {    
+    border-radius: 50%;
+    border-width: var(--border-width);
+
+    &::after {
+        display: none;
+        width: var(--checkbox-size-default);
+        height: var(--checkbox-size-default);
+        content: "";
+    }
+
+    &:checked {        
+        &::after {
+            display: block;
+            background-color: #5bcd3e;
+        }
+    }
+}

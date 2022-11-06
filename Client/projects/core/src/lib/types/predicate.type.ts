@@ -1,0 +1,1 @@
+export type Predicate<T = any> = (target: T, index?: number, array?: Iterable<T>) => boolean;

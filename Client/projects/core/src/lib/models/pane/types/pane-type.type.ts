@@ -1,0 +1,1 @@
+export type PaneType = "persistent" | "permanent" | "temporary";

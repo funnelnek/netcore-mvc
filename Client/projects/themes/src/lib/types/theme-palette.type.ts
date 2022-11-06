@@ -1,0 +1,1 @@
+export type ThemePalette = "primary" | "secordary" | "warning" | "error" | "accent" | "disabled" | "standard";

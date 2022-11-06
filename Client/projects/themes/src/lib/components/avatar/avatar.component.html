@@ -1,0 +1,6 @@
+<div #avatar class="avatar-container" *ngSwitch="hasImage">
+  <div [ngClass]="statusIndicator" *ngIf="showStatusIndicator"></div>
+  <img *ngSwitchCase="true" [src]="image" [alt]="name" />
+  <p *ngSwitchDefault>{{ name | avatar:initials }}</p>
+</div>
+<ui-tooltip [target]="avatar" #tooltip *ngIf="showTooltip">{{ name }}</ui-tooltip>

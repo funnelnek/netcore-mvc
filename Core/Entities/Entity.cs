@@ -9,7 +9,7 @@ namespace Core.Entities
 {
     public class Entity
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         public object this[string key]
         {

@@ -1,0 +1,18 @@
+<hero>
+    <div class="info">
+        <avatar size="large" [name]="name"></avatar>
+        <div>
+            <h1 class="name">
+                <span class="firstname">{{ user.firstname }}</span>
+                <span class="lastname">{{ user.lastname }}</span>
+            </h1>
+            <p class="title">{{ user.title }}</p>
+            <p class="description">{{ user.description }}</p>
+        </div>
+    </div>
+    <div class="social-links">
+        <a *ngFor="let link of user.socialLinks" [href]="link.url">
+            <icon></icon>
+        </a>
+    </div>
+</hero>

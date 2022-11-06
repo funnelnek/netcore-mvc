@@ -1,0 +1,1 @@
+export type IconVariation = "filled" | "outline" | "duo-tone" | "rounded" | "sharp";

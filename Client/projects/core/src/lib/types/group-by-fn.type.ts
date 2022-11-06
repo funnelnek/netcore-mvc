@@ -1,0 +1,1 @@
+export type GroupByFn<T> = (target: T, index?: number, array?: T[]) => string;

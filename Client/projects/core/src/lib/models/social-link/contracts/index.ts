@@ -1,0 +1,1 @@
+export { ISocialLink } from './ISocialLink';

@@ -1,0 +1,12 @@
+<input #slider type="range" class="slider"
+    [name]="name" 
+    [min]="min" 
+    [max]="max" 
+    [step]="step"
+    [value]="value"
+    (input)="onValueChange(slider.value)"
+/>
+<label *ngIf="label" [for]="name"></label>
+<div class="track">
+    <span class="fill" [ngStyle]="position$ | async"></span>
+</div>

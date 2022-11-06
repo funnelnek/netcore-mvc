@@ -1,0 +1,1 @@
+export type IterableContains<T> = Iterable<T> & Pick<ICollection, 'contains'>;

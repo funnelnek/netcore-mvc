@@ -1,0 +1,17 @@
+<figure class="media">
+  <img [src]="url" [alt]="title">
+</figure>
+
+<div class="body">
+  <h3 class="title">{{ title }}</h3>
+  <p class="description">{{ description }}</p>
+  <div class="ratings" *ngIf="showRatings">
+    
+  </div>
+  <p class="price">{{ price }}</p>
+</div>
+
+
+<div class="action-container">
+  <button #addToCart class="add-to-cart-btn">Add to Cart</button>
+</div>

@@ -1,0 +1,161 @@
+input[type="text"],
+input[type="password"] {
+    border: none;
+    outline: none;
+    font-size: 1.6rem;
+    background: 
+        linear-gradient(90deg, #222, #222) left bottom/0% 2px no-repeat,
+        linear-gradient(90deg, #ccc, #ccc) left bottom/100% 2px no-repeat;
+    transition: background-size .3s ease;
+    
+
+    &.outlined {
+        border: 2px solid #ccc;
+        border-radius: var(--input-border-radius);
+        background: none;
+
+        &.animated {            
+            & ~ .filler {
+                position: absolute;
+                top: var(--input-text-padding);
+                left: 0;
+                width: 100%;
+                height: calc(100% - var(--input-text-padding));
+                border-radius: var(--input-border-radius);
+
+                &::before,
+                &::after {
+                    position: absolute;
+                    display: inline-block;
+                    width: 0%;
+                    height: 0%;
+                    border-width: 2px;
+                    border-style: solid;
+                    border-radius: var(--input-border-radius);                    
+                    content: "";
+                }
+            
+                &::before {
+                    right: 0;
+                    bottom: 0;
+                    transition:
+                        border-width 0s ease 1.2s, 
+                        width .3s ease .9s,
+                        height .3s ease .6s;
+                }
+
+                &::after {    
+                    top: 0;
+                    left: 0;                
+                    transition:                        
+                        width .3s ease .3s,
+                        height .3s ease;
+                }
+            }
+
+            &.valid {
+                & ~ .filler::before,
+                & ~ .filler::after {
+                    width: 100%;
+                    height: 100%;
+                }
+
+                & ~ .filler::before {
+                    border-bottom-color: #222;
+                    border-right-color: #222;                    
+                    transition: 
+                        border-width 0s ease .6s,
+                        width .3s ease,
+                        height .3s ease .3s;
+                }
+
+                & ~ .filler::after {          
+                    border-top-color: #222;          
+                    border-left-color: #222;
+                    transition: 
+                        border-width 0s ease .6s,
+                        width .3s ease .6s,
+                        height .3s ease .9s;
+                }
+            }   
+        }
+    }
+
+    &.filled {
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+        background: 
+            linear-gradient(90deg, #222, #222) left bottom/0% 2px no-repeat,
+            linear-gradient(90deg, #ccc, #ccc) left bottom/100% 2px no-repeat,
+            linear-gradient(90deg, #fafafa, #fafafa) left bottom/100% 2px no-repeat;
+
+        &.animated {
+            background: none;
+
+            & ~ .filler {
+                top: 0;
+                left: 0;
+                width: 0%;
+                height: 100%;              
+                border-top-right-radius: 3rem;  
+                border-bottom-right-radius: 3rem;  
+                background-color: var(--color-input-filled);
+                transition: .5s;
+                z-index: -1;
+                bottom: initial;
+            }
+        }
+    }
+
+    &:focus,
+    &.dirty {
+        background-size: 100% 2px, 100% 2px;
+        
+        &.outlined {
+            border-color: var(--color-primary);
+        }
+
+        .filled {
+            background-size: 100% 2px, 100% 2px, 100%;
+        }
+
+        &.animated.filled .filler {
+            width: 120%;
+        }
+    }
+
+    label {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        color: #ccc;
+        padding: 0 .124rem;
+        transform: translateY(-50%);
+        transition: .5s;
+        pointer-events: none;
+    }
+
+    .helper-text {
+        font-style: italic;
+    }
+}
+
+input:required {
+    label::before {
+        content: "*";
+    }
+}
+
+input::placeholder,
+textarea {
+    color: var(--color-input-placeholder);
+}
+
+input.dirty + label,
+input:focus + label,
+input:not(:placeholder-shown) + label {     
+    top: 0;
+    background-color: #fff;
+    font-size: 1rem;
+    color: var(--color-primary);
+}

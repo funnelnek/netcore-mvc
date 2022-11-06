@@ -36,7 +36,7 @@ namespace Infrastructure.Utility
                 query = Criteria.Aggregate(query, (current, filter) => current.Where(filter));
             }
 
-            if (OrderBy.Count > 0)
+            if (OrderBy.Count() > 0)
             {
                 var sortable = OrderBy.First();
                 

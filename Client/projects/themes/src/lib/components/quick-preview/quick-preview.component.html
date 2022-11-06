@@ -1,0 +1,44 @@
+<div class="backdrop"></div>
+<div #container class="container">
+  <span class="close">
+    <button #closeBtn class="close-btn">X</button>
+  </span>
+  <ng-container *ngIf="this.isShowing" [ngTemplateOutlet]="productInfo" [ngTemplateOutletContext]="this.preview$ | async" #container></ng-container>
+</div>
+
+<ng-template #productInfo let-product>
+  <div class="product-info">
+    <!--Product Image-->
+    <figure class="product-image">
+      <img [src]="product.image" [alt]="product.title">
+    </figure><!--END of Product Image-->
+
+    <!--Product Details-->
+    <div class="details">
+      <header>
+        <h2 class="title">{{ product.title }}</h2>
+        <span class="sku">{{ product.sku }}</span>
+      </header>
+
+      <hr class="divisor">
+
+      <div class="product-description">
+        <p class="description">{{ product.description }}</p>
+      </div>
+
+      <div class="pricing">
+        <p class="price">{{ product.price | currency }}</p>
+        <p class="discount" *ngIf="product.mrsp">
+          <s>{{ product.mrsp | currency }}</s>
+        </p>
+      </div>
+
+      <hr class="divisor">
+
+      <div class="actions">
+        <button (click)="addToCart()">Add to Cart</button>
+        <button (click)="addToWishlist()">Add to Wishlist</button>
+      </div>
+    </div><!--END of Product Details-->
+  </div>
+</ng-template>

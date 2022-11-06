@@ -1,0 +1,1 @@
+export type ArrayOperator<T = any> = (target: T, index?: number, array?: Iterable<T>) => void;

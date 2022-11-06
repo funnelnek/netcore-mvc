@@ -1,0 +1,24 @@
+:host {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &.collapsed app-branding {        
+        opacity: 0;
+    }
+}
+
+app-branding {
+    padding-left: 2rem;
+    transition: opacity .25s ease-out;
+}
+
+.menu-button {
+    display: flex;
+    width: 5rem;
+    height: 5rem;
+    padding: 13px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}

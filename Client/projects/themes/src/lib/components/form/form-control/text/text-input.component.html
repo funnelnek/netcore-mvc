@@ -1,0 +1,9 @@
+<div class="field">
+    <input #input (blur)="onTouched()" (input)="onValueChange(input.value)" type="text" [name]="name">
+    <label class="label" *ngIf="label"[for]="name">{{ label }}</label>
+    <span class="placeholder" *ngIf="placeholder" >{{ placeholder }}</span>
+    <span class="border"></span>
+</div>
+<div class="message-container">
+    <p class="message" *ngIf="errorMessage || helperText">{{ errorMessage ? errorMessage : helperText }}</p>    
+</div>

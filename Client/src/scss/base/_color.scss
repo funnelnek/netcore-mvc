@@ -1,0 +1,22 @@
+:root {
+  --color-error: red;
+  --color-success: green;
+  --color-warning: orange; 
+  --color-disabled: green;
+  --color-background-default: #fff;
+  --color-background-default: #000;
+  --color-font-default: #000;
+  --color-primary: #EB8942;
+  --color-primary-light: #F29857;
+  --color-primary-dark: #D26C33;
+  --color-secondary: #F8F8F5;
+  --color-secondary-light: #F8F8F5;
+  --color-secondary-dark: #F8F8F5;
+  --color-teritary: #71AED0;
+  --color-teritary-light: #71AED0;
+  --color-teritary-dark: #71AED0;
+}
+
+input {
+  --color-filled-background: #efefef; 
+}

@@ -1,0 +1,59 @@
+input[type="range"] {
+    width: 100%;
+    height: var(--input-range-height);
+    border-radius: var(--border-radius);
+    background-color: transparent;
+    
+    &::--webkit-slider-thumb {
+        appearance: none;
+        width: var(--dial-radius);
+        height: var(--dial-radius);
+        border-radius: 50%;
+        background-color: var(--dial-color);
+        z-index: 10;
+        box-shadow: 0 0 0 0 rgba(98, 0, 238, .1);
+        outline: none;        
+        cursor: pointer;
+        transition: .3s ease-in-out;
+
+        &:hover {
+            box-shadow: 0 0 0 2rem rgba(98, 0, 238, .1);
+        }
+    }
+
+    &:active::--webkit-slider-thumb {
+        box-shadow: 0 0 0 4rem rgba(98, 0, 238, .2);
+    }
+
+    & ~ .track {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: var(--input-range-height);
+        border-radius: var(--border-radius);
+        background-color: var(--bg-color);
+        z-index: 1;
+        overflow: hidden;
+
+        & .range {
+            display: block;
+            width: 0;
+            height: 100%;
+            background-color: var(--range-color);
+        }
+    }
+
+    &.multi {
+        position: absolute;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        z-index: 5;
+
+        &::--weblit-slider-thumb {
+            pointer-events: all;
+        }
+    }
+}
+

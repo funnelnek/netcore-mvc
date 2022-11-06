@@ -39,7 +39,6 @@ namespace API.Controllers
         public async Task<ActionResult<ProductDto>> GetProduct(int id)
         {
             var product = await _service.GetProductById(id);
-            var name = product["Name"];
             return Ok(_mapper.Map<Product, ProductDto>(product));
         }
 

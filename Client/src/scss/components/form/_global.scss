@@ -1,0 +1,54 @@
+:root {
+    --input-range-height: 1rem;
+}
+
+input {
+    appearance: none;
+    outline: none;
+}
+
+input[type="checkbox"] {
+    --icon: "\f00c";
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    display: flex;
+    width: var(--size);
+    height: var(--size);    
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;   
+
+    & + label {
+        color: #4c4c4c;
+        font-size: 5.5rem;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    &:hover {
+        background-color: #a5a5a5;
+    }
+}
+
+
+input[type="checkbox"].switch {
+    --width-default: 7.5rem;
+    --border-radius: 25%;
+    --animate-curve: cubic-bezier(0.34, 1.36, 0.2, 1);
+    --icon: '\f011';
+    --on-icon: "\f00c";    
+    --off-icon: "\f00d";    
+    --dial-radius: "";
+    --dial-shadow-color: #ccc;
+} 
+
+input[type="range"] {
+    --height: 1rem;
+    --border-radius: .5rem;
+    --dial-radius: 3rem;
+    --bg-color: #c6aee7;
+    --dial-color: #6200ee;
+    --range-color: var(--dial-color);
+}

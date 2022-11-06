@@ -1,0 +1,105 @@
+.pane {
+    position: relative;
+    width: var(--pane-size-expanded);
+    height: 100%;
+    overflow-y: auto;
+    flex: 1 0 auto;
+    z-index: var(--pane-stack-index);
+    -webkit-overflow-scrolling: touch;
+
+    &.vertical {
+        display: flex;        
+        flex-direction: column;
+    }
+
+    &.horizontal {
+        display: flex;
+        flex-direction: row;
+    }
+
+    &.temporary {
+        position: fixed;
+
+        &.expanded .backdrop {
+            display: block;
+            opacity: 1;
+            pointer-events: auto;
+        }
+    }
+
+    &:not(.temporary) {
+        &.left {
+            border-right: 1px solid #888;
+        }
+
+        &.right {
+            border-left: 1px solid #888;
+        }
+
+        &.top {
+            border-bottom: 1px solid #888;
+        }
+
+        &.botttom {
+            border-top: 1px solid #888;
+        }
+    }
+    
+    &.top {
+        top: 0;
+        left: 0;
+        right: 0;
+        height: auto;
+        max-height: 100%;
+    }
+    
+    &.right {
+        right: 0;
+    }
+    
+    &.bottom {
+        top: auto;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: auto;
+        max-height: 100%;
+    }
+
+    &.left {
+        left: 0;
+    }
+
+    &.left.minimized, &.right.minimized {
+        width: var(--pane-size-minimized);
+    }
+
+    &.top.minimized, &.bottom.minimized {
+        height: var(--pane-size-minimized);
+    }
+
+    &.left.collapsed, &.right.collapsed {
+        width: var(--pane-size-collapsed);
+    }
+
+    &.top.collapsed, &.bottom.collapsed {
+        height: 0;
+    }
+
+    .backdrop {
+        position: fixed;
+        display: none;
+        opacity: 0;
+        top: 0;        
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1100;
+        transition: opacity .25s ease-in-out;
+        pointer-events: none;
+    }
+
+    .container {
+        z-index: var(--pane-stack-index);
+    }
+}

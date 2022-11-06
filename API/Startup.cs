@@ -30,12 +30,16 @@ namespace API
             services.AddDbContext<StoreContext>();
 
             // Repositories Services
-            services.AddAutoMapper(typeof(MappingProfiles));
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<IProductRepository, ProductRepository>();
 
-            
+            // AutoMapper
+            services.AddAutoMapper(typeof(MappingProfiles));
+
+            //Services
             services.AddScoped<ProductService>();
+
+            // CORS Service
             services.AddCors(options => {
                 options.AddPolicy("CorsPolicy", policy => {
                     policy

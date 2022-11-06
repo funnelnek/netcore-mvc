@@ -1,0 +1,2 @@
+export const STAGE_LOADING = 'STAGE LOADING';
+export const STAGE_LOADED = 'STAGE LOADED';

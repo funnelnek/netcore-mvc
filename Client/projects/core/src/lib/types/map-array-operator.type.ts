@@ -1,0 +1,1 @@
+export type MapArrayOperator<T, R> = (target: T, index: number, collection: Iterable<T>) => R;

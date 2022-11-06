@@ -1,0 +1,27 @@
+:root {
+    --button-default-padding: .8rem;
+    --button-icon-size: 2.4rem;
+    --pane-stack-index: 1200;
+    --pane-size-expanded: 30rem;
+    --pane-size-minimized: 6rem;
+    --pane-size-collapsed: 0rem;
+}
+
+input {
+    --border-width: .2rem;
+}
+
+textarea,
+input[type="text"],
+input[type="time"],
+input[type="number"],
+input[type="password"] {
+    --padding: 1rem;
+    --border-radius: .3rem;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    --size: 8rem;    
+}
+

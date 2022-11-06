@@ -1,0 +1,1 @@
+export type SortComparator<T = any> = (a: T, b: T) => number;
