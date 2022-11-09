@@ -1,0 +1,19 @@
+:host {
+    position: relative;
+}
+
+.field {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.message-container {
+    position: relative;
+
+    & .helper-text {
+        font-style: italic;
+        color: #999;
+        pointer-events: none;
+    }
+}

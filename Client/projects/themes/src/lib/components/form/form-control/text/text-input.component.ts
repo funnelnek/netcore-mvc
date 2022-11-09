@@ -18,14 +18,15 @@ import { InputComponent } from '../base/input.component';
   ]
 })
 export class TextInputComponent extends InputComponent implements OnInit {
-  protected _autoComplete: AutoComplete = 'off';
+  protected _autocomplete: AutoComplete = 'off';
   protected _list!: string;
   protected _max!: number;
   protected _min!: number;
   protected _pattern!: string | RegExp;
-  protected _placeholder!: string;
+  protected _placeholder: string = ' ';
   protected _helperText!: string;
   protected _variant: string = 'standard';
+  protected _animated: boolean = false;
   
   constructor (
     injector: Injector
@@ -33,13 +34,11 @@ export class TextInputComponent extends InputComponent implements OnInit {
     super(injector);
   }  
 
-  @HostBinding()
-  get className(): IEnumerable<boolean> {
-    return {
-      standard: this.variant === 'standard',
-      filled: this.variant === 'filled',
-      outlined: this.variant === 'outlined'
-    };
+  
+
+  @Input()
+  set animated(value: boolean) {
+    this._animated = value;
   }
 
   @Input()
@@ -48,8 +47,8 @@ export class TextInputComponent extends InputComponent implements OnInit {
   }
 
   @Input()
-  set autoComplete(value: AutoComplete) {
-    this._autoComplete = value;
+  set autocomplete(value: AutoComplete) {
+    this._autocomplete = value;
   }
 
   @Input()
@@ -76,13 +75,23 @@ export class TextInputComponent extends InputComponent implements OnInit {
   set helperText(value: string) {
     this._helperText = value;
   }
+
+  @HostBinding('class')
+  get className(): IEnumerable<boolean> {
+    return {
+      standard: this.variant === 'standard',
+      filled: this.variant === 'filled',
+      outlined: this.variant === 'outlined',
+      animated: this._animated
+    };
+  }
   
   get variant(): string {
     return this._variant;
   }
 
-  get autoComplete(): AutoComplete {
-    return this._autoComplete;
+  get autocomplete(): AutoComplete {
+    return this._autocomplete;
   }
 
   get list(): string {

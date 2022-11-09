@@ -1,0 +1,17 @@
+:root {
+    --color-primary: #{ $color-primary };
+}
+
+
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    background-color: $color-dark;
+}
+
+header {
+    --bg-color: #{ $color-black };
+}   

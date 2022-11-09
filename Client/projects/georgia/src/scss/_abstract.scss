@@ -1,0 +1,26 @@
+@import "variables";
+@import "functions";
+@import "color";
+@import "mixin";
+@import "typography";
+
+%fullSpace {
+    width: 100%;
+    height: 100%;
+}
+
+%primaryHeading {
+    font-family: var(--font-dancing-script);
+    font-size: 10rem;
+    font-weight: 300;
+    color: var(--color-primary);
+    margin-bottom: 4rem;
+}
+
+%subHeading {
+    font-family: var(--font-josefin-sans);
+    font-size: 6rem;
+    font-weight: 300;
+    color: var(--color-secondary);
+    margin-bottom: 8rem;
+}

@@ -14,6 +14,10 @@ const routes: Routes = [
     pathMatch: "full",
     loadChildren: () => import("./dashboard/dashboard.module").then(m => m.DashboardModule),
     canLoad: [AuthenicationGuard]
+  },
+  {
+    path: "projects/georgia",
+    loadChildren: () => import("projects/georgia/src/app/app.module").then(m => m.GeorgiaAppModule)
   }
 ];
 

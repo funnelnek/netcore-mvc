@@ -11,6 +11,7 @@ import { AppServiceProviders } from './services/app-service-providers';
 import { APP_HTTP_INTERCEPTORS } from '@client/core';
 import { HttpInterceptors } from './services/interceptors/http-interceptor.factory';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { HttpClientModule } from '@angular/common/http';
     RouterModule,
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     AppRoutingModule,
-    ThemesModule
+    ThemesModule,
+    ReactiveFormsModule
   ],
   providers: AppServiceProviders.concat([
     {

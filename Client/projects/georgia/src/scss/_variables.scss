@@ -1,0 +1,29 @@
+$color-primary: #d3ab55;
+$color-secondary: #bbb;
+$color-dark: #262626;
+$color-black: #000;
+$color-white: #fff;
+
+$font-dancing-script: "Dancing Script", cursive;
+$font-josefin-sans: "Josefin Sans", sans-serif;
+$font-nunito: Nunito, sans-serif;
+
+$section-main-heading-font: $font-dancing-script;
+$section-main-heading-size: 100rem;
+$section-sub-heading-font: $font-josefin-sans;
+$section-sub-heading-size: 6rem;
+
+:root {
+    --color-primary: #{ $color-primary };
+    --color-secondary: #{ $color-secondary };
+    --color-dark: #{ $color-dark };
+    --color-black: #{ $color-black };
+    --color-white: #{ $color-white };
+    --section-main-heading-font: #{ $section-main-heading-font };
+    --section-main-heading-size: #{ $section-main-heading-size };
+    --section-sub-heading-font: #{ $section-sub-heading-font };
+    --section-sub-heading-size: #{ $section-sub-heading-size };
+    --font-dancing-script: #{ $font-dancing-script };
+    --font-josefin-sans: #{ $font-josefin-sans };
+    --font-nunito: #{ $font-nunito };
+}

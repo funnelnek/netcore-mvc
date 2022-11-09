@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { AdminStoreModule } from './features/admin';
 import { AppStoreModule } from './features/app';
@@ -17,7 +18,8 @@ import { StageStoreModule } from './features/stage';
     ProductsStoreModule,
     ShoppingCartStoreModule,
     StageStoreModule,
-    SecurityStoreModule
+    SecurityStoreModule,
+    EffectsModule.forRoot()
   ],
   exports: []
 })

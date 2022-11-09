@@ -3,8 +3,7 @@ import { AbstractHttpInterceptor, DataTransferInterceptor, InterceptorConfigurat
 import { AuthenicationInterceptor, AuthorizationInterceptor } from "@client/store";
 
 
-export const config: InterceptorConfiguration = {
-    
+export const config: InterceptorConfiguration = {    
 };
 
 export const interceptors: Type<AbstractHttpInterceptor>[] = [

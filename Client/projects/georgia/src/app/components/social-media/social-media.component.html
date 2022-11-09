@@ -1,0 +1,7 @@
+<ul class="social-media">
+    <li class="profile" *ngFor="let profile of (socialMedia | async)">
+        <a [href]="profile.handle" class="social-media-link">
+            <i [class]="profile.icon"></i>
+        </a>
+    </li>
+</ul>

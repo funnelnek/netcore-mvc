@@ -1,18 +1,60 @@
-:root {
-    --input-range-height: 1rem;
+.form-control,
+.field,
+input,
+form-control,
+input ~ label {
+    --border-width: .2rem;
+    --border-inactive-color: var(--color-disabled);
+    --border-active-color: var(--color-primary);
+    --label-bg-color: #fff;
+    --label-inactive-color: var(--color-disabled);
+    --label-active-color: var(--color-primary);
+    --placeholder-color: #ccc;
 }
 
 input {
     appearance: none;
+    border: none;
     outline: none;
+
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    :-webkit-autofill:active {       
+        box-shadow: 0 0 0 40px white inset !important;
+    }
+
+    &.filled:-webkit-autofill,
+    &.filled:-webkit-autofill:hover,
+    .filled:-webkit-autofill:active {       
+        box-shadow: 0 0 0 40px var(--color-filled-background) inset !important;
+    }
+
+    &::placeholder,
+    &:placeholder-shown ~ label {
+        color: var(--placeholder-color);
+    }   
+    
+    &:focus { 
+        & ~ label {
+            color: var(--color-primary);
+        }
+    }
 }
 
-input[type="checkbox"] {
-    --icon: "\f00c";
+textarea,
+input[type="text"],
+input[type="time"],
+input[type="number"],
+input[type="password"],
+label {
+    --padding: 1rem;
+    --border-radius: .3rem;
 }
 
 input[type="checkbox"],
 input[type="radio"] {
+    --size: 8rem;    
+
     display: flex;
     width: var(--size);
     height: var(--size);    
@@ -32,6 +74,9 @@ input[type="radio"] {
     }
 }
 
+input[type="checkbox"] {
+    --icon: "\f00c";
+}
 
 input[type="checkbox"].switch {
     --width-default: 7.5rem;
@@ -51,4 +96,9 @@ input[type="range"] {
     --bg-color: #c6aee7;
     --dial-color: #6200ee;
     --range-color: var(--dial-color);
+}
+
+input ~ label {
+    background-color: #fff;
+    padding: 0 .2rem;
 }

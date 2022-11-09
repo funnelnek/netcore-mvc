@@ -1,0 +1,17 @@
+@import "../../../scss/abstract";
+
+
+footer {
+    padding: 7rem 0;
+    flex-direction: column;
+    @include flexLayout;
+
+    @media(max-width: 500px) {
+        padding: 4rem 0;
+    }
+
+    georgia-branding {
+        position: relative;       
+        margin-bottom: 7rem;
+    }
+}

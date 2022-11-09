@@ -4,6 +4,7 @@ import { IconModule } from './components/icon/icon.module';
 import { PaneModule } from './components/pane/pane.module';
 import { AppBarModule } from './components/appbar/appbar.module';
 import { ElevationDirective } from './directives/elevation/elevation.directive';
+import { FormControlsModule } from './components';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { ElevationDirective } from './directives/elevation/elevation.directive';
     IconModule,
     ElevationDirective,
     PaneModule,
-    AppBarModule
+    AppBarModule,
+    FormControlsModule
   ]
 })
 export class ThemesModule { }

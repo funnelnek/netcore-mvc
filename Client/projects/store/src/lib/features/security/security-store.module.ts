@@ -32,7 +32,7 @@ import { SecurityStoreConfig } from './config/security.config';
     {
       provide: SECURITY_STORE_CONFIG,
       useFactory: SecurityStoreConfig
-    }
+    }   
   ]
 })
 export class SecurityStoreModule { }

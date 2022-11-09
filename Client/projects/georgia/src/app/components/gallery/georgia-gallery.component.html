@@ -1,0 +1,12 @@
+<section class="gallery">
+    <div class="cards">
+        <div class="card" *ngFor="let food of (gallery | async)">
+            <div class="overlay">
+                <h1 class="heading">{{ food.name }}</h1>
+                <p class="price">Price: ${{ food.price }}</p>
+                <button class="card-btn">Order Now</button>
+            </div>
+            <img [src]="food.image" class="image">
+        </div>
+    </div>
+</section>

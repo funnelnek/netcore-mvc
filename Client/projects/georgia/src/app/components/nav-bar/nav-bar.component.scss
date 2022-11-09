@@ -1,0 +1,182 @@
+@import "../../../scss/abstract";
+
+:host {
+    position: relative;
+    z-index: 500;
+}
+
+.navbar {
+    position: relative;
+
+    & > input[type="checkbox"] {
+        display: none;
+
+
+        &:checked {
+            & ~ .hamburger-menu {
+                label {
+                    transform: rotateZ(90deg);
+                    transition: transform .5s;
+
+                    .menu-line {                        
+                        transform-origin: right;
+                        transition: all .5s .5s;
+
+
+                        &-1 {
+                            transform: rotateZ(-40deg);
+                        }
+
+                        &-2 {
+                            opacity: 0;
+                        }
+
+                        &-3 {
+                            transform: rotateZ(40deg);
+                        }
+                    }
+                }
+            }
+            & ~ .navigation {
+                .left {
+                    left: 0;
+                }
+
+                .right {
+                    right: 0;
+                }
+            }
+        }
+    }
+
+    .hamburger-menu {
+        position: fixed;
+        top: 10%;
+        right: 5%;
+        width: 4rem;
+        height: 4rem;
+        z-index: 700;
+
+        @media(max-width: 800px) {
+            width: 3.5rem;
+            height: 3.5rem;
+        }
+
+        @media(max-width: 500px) {
+            width: 2.5rem;
+            height: 2.5rem;
+        }
+
+        label {
+            @extend %fullSpace;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            cursor: pointer;
+            transition: all .5s;            
+
+            .menu-line {
+                width: 100%;
+                height: .4rem;
+                background-color: var(--color-primary);
+                transition: all .5s .5s;
+
+                @media(max-width: 800px) {                    
+                    height: .3rem;
+                }
+
+                @media(max-width: 500px) {                    
+                    height: .2rem;
+                }
+            }
+        }
+    }
+
+    .navigation {        
+        display: flex;
+
+        .left,
+        .right {
+            position: fixed;
+            width: 50vw;
+            height: 100vh; 
+        }
+        
+        .left {            
+            left: -50vw;
+            background-color: var(--color-dark);
+            transition: left .8s cubic-bezier(1, 0, 0, 1);
+
+            @media(max-width: 800px) {
+                display: none;
+            }
+            
+            .nav-image {
+                position: absolute;
+                width: 50%;
+                box-shadow: 0 1.5rem 6rem rgba($color-black, .4);
+                opacity: .7;
+                border-radius: 1rem;
+
+                @media(max-width: 1300px) {
+                    width: 55%;
+                }
+
+                @media(max-width: 1000px) {
+                    width: 65%;
+                }
+
+                @for $i from 0 through 2 {
+                    &-#{$i + 1} {
+                        top: 15% + (20 * $i);
+                        left: 15% + (10 * $i);
+
+                        @media(max-width: 1000px) {
+                            left: 5% + (10 * $i);
+                        }
+                    }
+                }
+            }
+        }
+
+        .right {
+            right: -50vw;
+            background-color: #1f1d1d;
+            transition: right .8s cubic-bezier(1, 0, 0, 1);
+            @include flexLayout;
+
+            @media(max-width: 800px) {
+                width: 100vw;
+                right: -100vw;
+            }
+
+            .nav-menu {
+                .nav {
+                    list-style: none;
+
+                    .nav-link {
+                        display: block;
+                        font-family: var(--font-dancing-script);
+                        font-size: 5rem;
+                        color: var(--color-secondary);
+                        text-decoration: none;
+                        text-align: center;
+                        margin: 2rem;
+                        cursor: pointer;
+                        @include textStyles(capitalize);
+
+                        &:hover {
+                            color: var(--color-primary);
+                            letter-spacing: .4rem;
+                            transition: all .5s;
+                        }
+
+                        @media(max-width: 600px) {
+                            font-size: 4rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

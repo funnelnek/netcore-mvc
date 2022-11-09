@@ -1,17 +1,12 @@
 input[type="text"],
 input[type="password"] {
-    border: none;
-    outline: none;
-    font-size: 1.6rem;
-    background: 
-        linear-gradient(90deg, #222, #222) left bottom/0% 2px no-repeat,
-        linear-gradient(90deg, #ccc, #ccc) left bottom/100% 2px no-repeat;
-    transition: background-size .3s ease;
-    
+    padding: var(--padding) 0;
+    font-size: 1.6rem;   
 
     &.outlined {
+        padding: var(--padding);
         border: 2px solid #ccc;
-        border-radius: var(--input-border-radius);
+        border-radius: var(--border-radius);
         background: none;
 
         &.animated {            
@@ -79,15 +74,21 @@ input[type="password"] {
                 }
             }   
         }
+
+        & + label {
+            left: var(--padding);
+        }
+
+        & ~ .border {
+            display: none;
+        }
     }
 
     &.filled {
+        padding: calc(var(--padding) * 3) var(--padding) var(--padding);  
         border-top-left-radius: 3px;
-        border-top-right-radius: 3px;
-        background: 
-            linear-gradient(90deg, #222, #222) left bottom/0% 2px no-repeat,
-            linear-gradient(90deg, #ccc, #ccc) left bottom/100% 2px no-repeat,
-            linear-gradient(90deg, #fafafa, #fafafa) left bottom/100% 2px no-repeat;
+        border-top-right-radius: 3px;     
+        background-color: var(--color-filled-background);
 
         &.animated {
             background: none;
@@ -105,11 +106,55 @@ input[type="password"] {
                 bottom: initial;
             }
         }
+
+        & + label {
+            left: var(--padding);
+            background-color: transparent;
+        }
+    } 
+
+    &:required,
+    &.required {
+
+        & + label{
+            color: var(--color-error);
+
+            &::after {
+                content: "*";
+            }
+        }
+    }
+
+    &:placeholder-shown {
+        & + label {
+            @include inputLabelWithPlaceholder();
+        }
+    }
+
+    & + label {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        padding: 0 .2rem;
+        transform: translateY(-50%);
+        transition: .25s;
+        pointer-events: none;
+    }
+
+    & ~ .border {
+        width: 100%;
+        height: 2px;
+        background: 
+            linear-gradient(90deg, var(--color-primary), var(--color-primary)) center bottom/0% 2px no-repeat,
+            linear-gradient(90deg, #ccc, #ccc) center bottom/100% 2px no-repeat;
+        transition: background-size .3s ease;
     }
 
     &:focus,
     &.dirty {
-        background-size: 100% 2px, 100% 2px;
+        & ~ .border {
+            background-size: 100% 2px, 100% 2px;
+        }
         
         &.outlined {
             border-color: var(--color-primary);
@@ -123,39 +168,17 @@ input[type="password"] {
             width: 120%;
         }
     }
-
-    label {
-        position: absolute;
-        left: 0;
-        top: 50%;
-        color: #ccc;
-        padding: 0 .124rem;
-        transform: translateY(-50%);
-        transition: .5s;
-        pointer-events: none;
-    }
-
-    .helper-text {
-        font-style: italic;
-    }
-}
-
-input:required {
-    label::before {
-        content: "*";
-    }
-}
-
-input::placeholder,
-textarea {
-    color: var(--color-input-placeholder);
 }
 
 input.dirty + label,
 input:focus + label,
 input:not(:placeholder-shown) + label {     
-    top: 0;
-    background-color: #fff;
+    @include inputLabelWithPlaceholder();
+}
+
+input.filled:focus + label,
+input.filled:not(:placeholder-shown) + label {     
+    top: 1.5rem;      
+    padding: 0;  
     font-size: 1rem;
-    color: var(--color-primary);
 }

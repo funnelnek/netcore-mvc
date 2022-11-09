@@ -1,0 +1,74 @@
+@import "../../../scss/mixin";
+
+
+:host {
+    position: absolute;
+    width: inherit;
+    height: inherit;
+}
+
+.brand {
+    display: flex;    
+    align-items: center;
+    @include centering(15%);
+
+    @media(max-width: 500px) {                    
+        @include centering(12%);
+    }
+
+    .logo { 
+        display: flex;
+        width: 11rem;
+        height: 11rem;
+        font-size: 7rem;
+        border: .3rem solid var(--color-primary);
+        border-radius: 50%;
+        color: var(--color-primary);
+        align-items: center;
+        justify-content: center;
+        margin-right: 2rem;
+        text-decoration: none;
+
+        @media(max-width: 1000px) {
+            font-size: 5rem;
+            width: 9rem;
+            height: 9rem;
+        }
+
+        @media(max-width: 500px) {                    
+            width: 5rem;
+            height: 5rem;
+            font-size: 3rem;
+            border-width: .2rem;
+        }
+    }
+
+    .main-name {
+        font-family: var(--font-nunito);   
+        font-size: 5rem;
+        color: var(--color-secondary);
+        @include textStyles;
+
+        @media(max-width: 1000px) {
+            font-size: 4rem;
+        }
+
+        @media(max-width: 500px) {                    
+            font-size: 2rem;
+            text-align: center;
+        }
+    }
+}   
+
+.sub-name {
+    font-family: var(--font-josefin-sans);
+    font-size: 1.8rem;
+    color:  var(--color-secondary);
+    text-align: center;
+    @include textStyles;
+
+    @media(max-width: 500px) {                    
+        font-size: 1.2rem;
+        text-align: center;
+    }
+}

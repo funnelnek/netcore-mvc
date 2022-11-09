@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
+import { FormControl } from '@angular/forms';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -7,10 +8,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  constructor() {    
+  _control!: FormControl<string | null>;
+
+  constructor() {
   }
 
-  async ngOnInit(): Promise<void> {
-    
+  get control(): FormControl<string | null> {
+    return this._control;
+  }
+
+  async ngOnInit(): Promise<void> {    
+    let control = this._control = new FormControl('');
+  
+    control.valueChanges.subscribe(console.log);
   }
 }
