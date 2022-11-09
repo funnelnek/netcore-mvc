@@ -5,6 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GrandHomeComponent } from './grand-home.component';
 import { NavbarModule } from './components/navbar/navbar.module';
+import { HeaderModule } from './components/header/header.module';
+import { AboutUsModule } from './components/about-us/about-us.module';
+import { RoomsModule } from './components/rooms/rooms.module';
 
 @NgModule({
   declarations: [
@@ -14,7 +17,10 @@ import { NavbarModule } from './components/navbar/navbar.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NavbarModule
+    NavbarModule,
+    HeaderModule,
+    AboutUsModule,
+    RoomsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

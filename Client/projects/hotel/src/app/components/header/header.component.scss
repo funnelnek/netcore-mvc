@@ -1,0 +1,13 @@
+:host {
+    position: relative;
+    height: 100vh;
+}
+
+header {
+    position: relative;
+    height: inherit;
+    background: 
+        linear-gradient(to top, rgba(0, 0, 0, .6), rgba(0, 0, 0, .5)),
+        url('/assets/images/header-1.jpeg') center no-repeat;
+    background-size: cover;
+}

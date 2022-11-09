@@ -1,0 +1,26 @@
+.heading {
+    font-family: var(--font-josefin-sans);
+    font-size: 4rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    color: var(--color-primary-dark);        
+}
+
+.underline {            
+    margin-bottom: 5rem;
+
+    .small-underline,
+    .big-underline {                
+        height: .1rem;
+        background-color: var(--color-primary-dark);
+    }
+
+    .small-underline {
+        width: 9rem;
+        margin: 0 auto 1rem auto;
+    }
+
+    .big-underline {
+        width: 20rem;
+    }
+}

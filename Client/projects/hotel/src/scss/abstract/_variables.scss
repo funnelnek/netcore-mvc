@@ -1,21 +1,25 @@
 // Color
 $color-primary: #deaa86;
+$color-primary-dark: #b85d1c;
 $color-secondary: #eee;
+$color-light-gray: #ddd;
 $color-dark-gray: #222;
 $color-light-dark-gray: #555;
 $color-social-link: #777;
 
 
 // Font
-$font-family-default: "Montserrat", sans-serif;
+$font-montserrat: "Montserrat", sans-serif;
 $font-josefin-sans: "Josefin Sans", sans-serif;
 
 :root {
     --color-primary: #{ $color-primary };
+    --color-primary-dark: #{ $color-primary-dark };
     --color-secondary: #{ $color-secondary };
     --color-dark-gray: #{ $color-dark-gray };
+    --color-light-gray: #{ $color-light-gray };
     --color-light-dark-gray: #{ $color-light-dark-gray };
     --color-social-link: #{ $color-social-link };
-    --font-family-default: #{ $font-family-default };
+    --font-montserrat: #{ $font-montserrat };
     --font-josefin-sans: #{ $font-josefin-sans };
 }

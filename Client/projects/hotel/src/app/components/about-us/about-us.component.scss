@@ -1,0 +1,86 @@
+@import "../../../scss/abstract/main";
+
+.about-us {
+    display: flex;
+    background-color: var(--color-light-gray);   
+}
+
+.content {
+    display: flex;
+    padding: 10rem;
+    flex-direction: column;
+    flex: 0 1 50%;
+    align-items: center;
+
+    
+
+    .sub-heading {
+        font-size: 3.5rem;
+        font-weight: 300;
+        letter-spacing: .2rem;
+        color: var(--color-primary-dark);
+        margin-bottom: 5rem;
+    }
+
+    .description {
+        font-size: 1.6rem;
+        font-style: italic;
+        font-weight: 300;
+        text-align: center;
+        margin-bottom: 5rem;
+    }
+
+    .cta-btn {
+        width: 15rem;
+        padding: .7rem .5rem;
+        font-family: var(--font-montserrat);
+        font-size: 1.2rem;
+        text-transform: uppercase;
+        background-color: transparent;
+        border: .1rem solid var(--color-primary-dark);
+        cursor: pointer;
+
+        .icon {
+            margin-left: .5rem;
+            transition: margin-left .4s;
+        }
+
+        &:hover {
+            .icon {
+                margin-left: 1.5rem;
+            }
+        }
+    }
+}
+
+.images {
+    position: relative;
+    flex: 1 1 50%;
+
+    img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 32rem;
+        border: .2rem solid var(--color-primary-dark);
+        border-radius: .4rem;
+        transform: translate(-50%, -50%);
+        box-shadow: 0 3rem 6rem rgba($color: #000000, $alpha: .4);
+
+        &.image-1 {
+            transform: translate(-20%, -90%);
+        }
+
+        &.image-2 {
+            transform: translate(-70%, -70%);
+        }
+
+        &.image-3 {
+            transform: translate(-50%, -50%);
+        }
+
+        &.image-4 {
+            transform: translate(-30%, -30%);
+        }
+    }
+}
