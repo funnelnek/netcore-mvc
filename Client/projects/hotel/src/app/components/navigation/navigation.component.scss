@@ -1,0 +1,111 @@
+@import "../../../scss/abstract/main";
+
+
+.navigation {
+    @extend %sidebar;    
+    position: relative;    
+    width: 40rem;    
+    padding-top: 3rem;
+    background: 
+        linear-gradient(to top, rgba(34, 32, 41, 1), rgba(34, 32, 41, .8)),
+        url("/assets/images/nav-bg.jpeg") center no-repeat;
+    background-size: cover;
+
+    .heading {
+        font-family: var(--font-josefin-sans);
+        font-size: 3.5rem;
+        font-weight: 300;
+        letter-spacing: .2rem;
+        color: var(--color-primary);
+        text-align: center;
+    }
+
+    &-search {
+        position: relative;
+        
+        input {
+            width: 30rem;
+            padding: 1rem 2rem;
+            background-color: rgba(0, 0, 0, .3);
+            font-family: var(--font-josefin-sans);
+            font-size: 1.6rem;
+            color: var(--color-primary);
+            letter-spacing: .1rem;
+            border: .1rem solid var(--color-light-dark-gray);
+            border-radius: 10rem;
+            transition: background-color .3s;
+    
+            &:focus {
+                background-color: rgba(0, 0, 0, .1);
+            }
+        }
+    
+        .search-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            border: none;
+            background-color: transparent;
+            color: var(--color-primary);
+            font-size: 1.7rem;
+            cursor: pointer;
+        }
+    }
+
+    &-menu {
+        display: flex;
+        height: 28rem;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+
+        .item {
+
+            .nav-link {                
+                position: relative;
+                color: #fff;
+                font-size: 1.6rem;
+                font-weight: 400;
+                letter-spacing: .1rem;
+                text-transform: uppercase;
+                text-decoration: none;
+                transition: color .5s;
+
+                &::before,
+                &::after {                    
+                    position: absolute;
+                    top: 1rem;
+                    width: 0rem;
+                    height: .1rem;
+                    background-color: var(--color-primary);                    
+                    transition: width .5s cubic-bezier(1, 0, 0, 1);
+                    content: "";
+                }
+
+                &::before {
+                    left: -4rem;                   
+                }
+
+                &::after {
+                    right: -4rem;                    
+                }
+
+                &:hover {
+                    color: var(--color-primary);
+
+                    &::before,
+                    &::after {
+                        display: block;
+                        width: 3rem;
+                    }
+                }
+            }
+        }
+    }  
+    
+    .copyright {
+        color: #fff;
+        font-size: 1.2rem;
+        margin-bottom: 1.5rem;
+    }
+}
