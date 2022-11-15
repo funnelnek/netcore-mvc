@@ -1,35 +1,39 @@
 {
   "global": {
-    "Dark Grey": {
-      "value": "#848484",
-      "type": "color"
-    },
-    "Primary": {
-      "Main": {
-        "value": "#eb8942",
-        "type": "color"
+    "color": {
+      "primary": {
+        "main": {
+          "value": "#eb8942",
+          "type": "color"
+        },
+        "light": {
+          "value": "#f29857",
+          "type": "color"
+        },
+        "dark": {
+          "value": "#e0772a",
+          "type": "color"
+        }
       },
-      "Light": {
-        "value": "#f29857",
-        "type": "color"
+      "secondary": {
+        "main": {
+          "value": "#f0f0f0",
+          "type": "color"
+        },
+        "light": {
+          "value": "#f9f9f9",
+          "type": "color"
+        },
+        "dark": {
+          "value": "#e1e1e1",
+          "type": "color"
+        }
       },
-      "Dark": {
-        "value": "#e0772a",
-        "type": "color"
-      }
-    },
-    "Secondary": {
-      "Main": {
-        "value": "#f0f0f0",
-        "type": "color"
-      },
-      "Light": {
-        "value": "#f9f9f9",
-        "type": "color"
-      },
-      "Dark": {
-        "value": "#e1e1e1",
-        "type": "color"
+      "grayscale": {
+        "dark": {
+          "value": "#848484",
+          "type": "color"
+        }
       }
     }
   },
